@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/sign-in.css">
+    <title>SignIn Page</title>
+    <!-- Recaptcha -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+    <h1>SignIn</h1>
+    <div class="container">
+        <!-- Error Message -->
+        <%if(errorMessage){ %>
+            <div class="alert alert-danger manage-width" role="alert">
+                <%= errorMessage %>
+            </div>
+        <%}%>
+
+        <!-- Success Message -->
+        <%if(successMessage){ %>
+            <div class="alert alert-success manage-width" role="alert">
+                <%= successMessage %>
+            </div>
+        <%}%>
+        <!-- Form that recieves the user credentials -->
+        <form action="" method="post" onsubmit="return validatereCAPTCHA()">
+            <label for="email">Email:</label>
+            <input type="text" name="email" id="email" placeholder="example@xyz.com">
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" placeholder="Enter your password here">
+            <!-- Recaptcha -->
+            <!-- Recaptcha field -->
+            <div class="g-recaptcha" style="margin-left: 25%;" data-sitekey="6LffzNspAAAAALs_q7Xh4Ta4-BsQ2ixhiVgiA9P0" required></div>
+            <button>Submit</button>
+        </form>
+        <a href="/api/users/forgot-password"><button>Forgot Password</button></a>
+    </div>
+
+    <script>
+        // Validate recaptcha challenge
+        function validatereCAPTCHA() {
+            var response = grecaptcha.getResponse();
+            if (response.length === 0) {
+                alert("Please complete the reCAPTCHA challenge.");
+                return false;
+            }else {
+                return true;
+            }
+        }
+    </script>
+</body>
+</html>

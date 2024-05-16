@@ -1,0 +1,4 @@
+.env
+src/features/views/second-step-verification.ejs
+src/utils/jwt.authentication.js
+node_modules
